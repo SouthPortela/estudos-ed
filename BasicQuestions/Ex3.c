@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 #define TAM 5
 
 typedef struct{
@@ -12,11 +12,11 @@ void inicializar(Pilha *p){
 }
 
 void push(Pilha *p, int Valor){
-  p->Topo++;
-  if(p->Topo == TAM -1){
+  if(p->Topo >= TAM -1){
     printf("ERRO: Topo maximo da pilha.\n");
     return;
   }
+  p->Topo++;
   p->Array[p->Topo] = Valor;
   printf("Valor do inteiro: %d(posicao da pilha: %d)\n", p->Array[p->Topo], p->Topo);
   
@@ -29,14 +29,14 @@ void pop(Pilha *p){
   }
   p->Topo--;
   if(p->Topo == -1){
-    printf("Voltou para o inicio.");
+    printf("Voltou para o inicio.\n");
   }else{
     printf("Voltou para %d\n", p->Array[p->Topo]);
   }
 }
 
 int main(){
-  Pilha *Ptr;
+  Pilha *Ptr = malloc(sizeof(Pilha));
   inicializar(Ptr);
   
   printf("----PREENCHENDO----\n\n\n");
@@ -54,6 +54,7 @@ int main(){
   pop(Ptr);
   pop(Ptr);
   pop(Ptr);
+  free(Ptr);
   return 0;
 }
 
